@@ -1,0 +1,6 @@
+﻿services:
+  cornertonemanager:
+    image: cornertonemanager
+    build:
+      context: .
+      dockerfile: CornertoneManager/Dockerfile
