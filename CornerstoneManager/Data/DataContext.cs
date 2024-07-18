@@ -3,12 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CornerstoneManager.Data;
 
-public class DataContext : DbContext
+public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
-    public DataContext(DbContextOptions<DataContext> options) : base(options)
-    {
-        
-    }
-
-    public DbSet<Person> Persons { get; set; }
+    public DbSet<Shift> Shifts { get; set; }
 }

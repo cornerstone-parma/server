@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CornerstoneManager.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240710134447_InitialMigration")]
+    [Migration("20240712180038_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -24,33 +24,29 @@ namespace CornerstoneManager.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CornerstoneManager.Entities.Person", b =>
+            modelBuilder.Entity("CornerstoneManager.Entities.Shift", b =>
                 {
-                    b.Property<int>("PersonID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("EndAt")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
+                    b.Property<string>("StartAt")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.HasKey("PersonID");
-
-                    b.ToTable("Persons");
+                    b.ToTable("Shifts");
                 });
 #pragma warning restore 612, 618
         }
