@@ -10,12 +10,6 @@ namespace CornerstoneManager.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Volunteers");
-
-            migrationBuilder.DropTable(
-                name: "Zones");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Title",
                 table: "Shifts",
@@ -51,19 +45,6 @@ namespace CornerstoneManager.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Volunteers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Zones",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Zones", x => x.Id);
                 });
         }
     }
