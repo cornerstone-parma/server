@@ -6,8 +6,14 @@ namespace CornerstoneManager.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ShiftsController(IShiftRepository shiftRepository) : ControllerBase
+public class ShiftsController(IShiftRepository shiftRepository, IHostEnvironment environment) : ControllerBase
 {
+    [HttpGet("env")]
+    public string GetEnv()
+    {
+        return environment.EnvironmentName;
+    }
+
     [HttpGet]
     public ActionResult<ICollection<Shift>> GetAll()
     {
