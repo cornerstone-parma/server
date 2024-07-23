@@ -7,8 +7,14 @@ namespace CornerstoneManager.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ShiftsController(IRepository<Shift> shiftRepository) : ControllerBase
+public class ShiftsController(IRepository<Shift> shiftRepository, IConfiguration config) : ControllerBase
 {
+    [HttpGet("secret")]
+    public ActionResult<string> Secret()
+    {
+        return config.GetValue<string>("ConnectionStrings:DefaultConnection") ?? "no secret";
+    }
+    
     [HttpGet]
     public ActionResult<ICollection<Shift>> GetAll()
     {
