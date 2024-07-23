@@ -4,10 +4,13 @@ namespace CornerstoneManager.Entities;
 
 public class Shift
 {
-    public int Id { get; set; }
-    
-    [MaxLength(100)]
+    [Key] public int Id { get; set; }
+
+    [Required]
+    [StringLength(100, MinimumLength = 3)]
     public required string Title { get; set; }
-    public DateTime StartAt { get; set; }
-    public DateTime EndAt { get; set; }
+
+    [Required] public DateTime StartAt { get; set; }
+
+    [Required] public DateTime EndAt { get; set; }
 }

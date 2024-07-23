@@ -1,18 +1,19 @@
 using CornerstoneManager.Data;
 using CornerstoneManager.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CornerstoneManager.Repositories;
 
-public class ShiftRepository(DataContext context) : IShiftRepository
+public class ShiftRepository(DataContext context) : IRepository<Shift>
 {
     public ICollection<Shift> GetAll()
     {
         return context.Shifts.ToList();
     }
 
-    public Shift? GetById(int id)
+    public Shift GetById(int id)
     {
-        return context.Shifts.Find(id);
+        return context.Shifts.Find(id) ?? throw new KeyNotFoundException();
     }
 
     public Shift Add(Shift shift)
@@ -27,7 +28,7 @@ public class ShiftRepository(DataContext context) : IShiftRepository
     {
         var currentShift = context.Shifts.Find(shift.Id);
 
-        if (currentShift is null) throw new Exception("Shift not found id: " + shift.Id);
+        if (currentShift is null) throw new Exception("Shift not found, id: " + shift.Id);
 
         currentShift.Title = shift.Title;
         currentShift.StartAt = shift.StartAt;
@@ -36,11 +37,9 @@ public class ShiftRepository(DataContext context) : IShiftRepository
         return context.SaveChanges();
     }
 
-    public int Delete(Shift shift)
+    public int Delete(int id)
     {
-        context.Shifts.Remove(shift);
-
-        return context.SaveChanges();
+        return context.Shifts.Where(s => s.Id == id).ExecuteDelete();
     }
 
     public bool Exists(int id)
